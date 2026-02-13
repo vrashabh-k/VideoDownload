@@ -7,15 +7,22 @@ document.addEventListener("DOMContentLoaded", () => {
       currentWindow: true
     });
 
-    const start = await fetch(
-      "http://localhost:3000/start?url=" +
-        encodeURIComponent(tab.url)
-    );
+    const API = "https://videodownload-tqg9.onrender.com";
 
-    const { id } = await start.json();
+    try {
+      const start = await fetch(
+        `${API}/start?url=` + encodeURIComponent(tab.url)
+      );
 
-    chrome.tabs.create({
-      url: "http://localhost:3000/file/" + id
-    });
+      const { id } = await start.json();
+
+      chrome.tabs.create({
+        url: `${API}/file/${id}`
+      });
+
+    } catch (err) {
+      console.error("Download error:", err);
+      alert("Server not reachable");
+    }
   });
 });
