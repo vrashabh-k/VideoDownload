@@ -6,5 +6,9 @@
   "permissions": ["activeTab"],
   "action": {
     "default_popup": "popup.html"
-  }
+  },
+  "host_permissions": [
+  "https://videodownload-tqg9.onrender.com/*"
+]
+
 }
